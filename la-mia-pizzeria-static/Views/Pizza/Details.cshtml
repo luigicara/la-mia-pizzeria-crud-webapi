@@ -1,0 +1,37 @@
+﻿@model Pizza;
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = $"Pizza {Model.Name}";
+}
+
+<div class="container">
+    <div class="col-12">
+        <div class="d-flex align-items-center">
+            <h1>Dettaglio pizza:</h1>
+        </div>
+
+        <div>
+            <img src="@Url.Content(Model.ImgPath)" />
+        </div>
+
+        <p>
+            <strong>Nome:</strong> @Model.Name
+        </p>
+
+        <p>
+            <strong>Ingredienti:</strong> 
+            @{var last = Model.Ingredients.Last();}
+            @foreach(Ingredient ingredient in Model.Ingredients) 
+            { 
+                if(ingredient.Equals(last))
+                    @ingredient.Name
+                else
+                    @(ingredient.Name + ", ") 
+            }
+        </p>
+
+        <p>
+            <strong>Prezzo:</strong> € @Model.Price.ToString()
+        </p>
+    </div>
+</div>
